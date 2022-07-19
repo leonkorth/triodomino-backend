@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class PlayerController {
     PlayerService service;
 
     @PostMapping(path = "/api/v1/players")
-    public Player createPlayer(@RequestBody Player player){
+    public Player createPlayer(@Valid @RequestBody Player player){
         return service.createPlayer(player);
     }
 

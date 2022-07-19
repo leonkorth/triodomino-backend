@@ -1,8 +1,9 @@
 package de.leonkorth.triodominobackend.persistence;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 @Entity(name = "player")
 public class Player {
@@ -10,10 +11,13 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name", unique = true,nullable = false)
+    @NotBlank(message = "the name must not be blank")
+    @Size(min = 3, max = 30, message = "please provide a name between 3 and 30 characters")
     private String name;
 
     @Column(name = "gender")
     @Enumerated(value = EnumType.STRING)
+    @NotNull
     private Gender gender;
 
     public Player(Long id, String name, Gender gender) {
