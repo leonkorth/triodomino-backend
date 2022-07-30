@@ -1,7 +1,7 @@
 package de.leonkorth.triodominobackend.web;
 
 
-import de.leonkorth.triodominobackend.persistence.Player;
+import de.leonkorth.triodominobackend.persistence.entities.Player;
 import de.leonkorth.triodominobackend.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

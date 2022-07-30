@@ -1,8 +1,8 @@
 package de.leonkorth.triodominobackend.web;
 
 
-import de.leonkorth.triodominobackend.persistence.Gender;
-import de.leonkorth.triodominobackend.persistence.Player;
+import de.leonkorth.triodominobackend.persistence.entities.Gender;
+import de.leonkorth.triodominobackend.persistence.entities.Player;
 import de.leonkorth.triodominobackend.service.PlayerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

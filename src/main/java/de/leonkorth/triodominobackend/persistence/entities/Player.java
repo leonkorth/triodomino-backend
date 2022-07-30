@@ -1,4 +1,4 @@
-package de.leonkorth.triodominobackend.persistence;
+package de.leonkorth.triodominobackend.persistence.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
