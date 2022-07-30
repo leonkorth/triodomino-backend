@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class GameController {
 
-    @Autowired
+    @Autowired(required = false)
     GameService service;
 
     @PostMapping(path = "/api/v1/games")

@@ -1,5 +1,8 @@
 package de.leonkorth.triodominobackend.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
@@ -13,6 +16,7 @@ public class Game {
     private Long id;
 
     @Column(name = "date", nullable = false)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @FutureOrPresent(message = "please provide a date in the future or present")
     private LocalDate date;
 

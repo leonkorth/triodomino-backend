@@ -1,7 +1,6 @@
 package de.leonkorth.triodominobackend.service;
 
 import de.leonkorth.triodominobackend.persistence.entities.Game;
-import de.leonkorth.triodominobackend.persistence.entities.Player;
 import de.leonkorth.triodominobackend.persistence.repos.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
