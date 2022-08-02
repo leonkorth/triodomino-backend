@@ -51,6 +51,33 @@ public class PlayerControllerTest {
              .andExpect(jsonPath("$[1].gender").value("MALE"));
 
  }
+
+
+ @Test
+ @DisplayName("should find player by name ")
+ void findPlayerByName1() throws Exception{
+     var player = new Player(1L,"Leon",Gender.MALE);
+
+     doReturn(player).when(playerService).findByName("Leon");
+
+     mockMvc.perform(get("/api/v1/players?name=Leon"))
+             .andExpect(status().isOk());
+
+ }
+
+    @Test
+    @DisplayName("should not find player by name ")
+    void findPlayerByName2() throws Exception{
+
+        doReturn(null).when(playerService).findByName("Leon");
+
+        mockMvc.perform(get("/api/v1/players?name=Leon"))
+                .andExpect(status().isNotFound());
+
+    }
+
+
+
  @Test
  @DisplayName("should validate create ingredient request with invalid name")
  void createInvalidPlayer() throws Exception{
