@@ -17,4 +17,9 @@ public class PlayerService {
     public Player createPlayer(Player player){
         return repository.save(player);
     }
+
+    public Player findByName(String name){
+        var playerEntity = repository.findFirstByName(name);
+        return playerEntity.orElse(null);
+    }
 }
