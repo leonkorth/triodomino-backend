@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 @Entity(name = "player")
-public class Player {
+public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +20,13 @@ public class Player {
     @NotNull
     private Gender gender;
 
-    public Player(Long id, String name, Gender gender) {
+    public PlayerEntity(Long id, String name, Gender gender) {
         this.id = id;
         this.name = name;
         this.gender = gender;
     }
 
-    public Player() {
+    public PlayerEntity() {
     }
 
     public Long getId() {
@@ -57,8 +57,8 @@ public class Player {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return Objects.equals(id, player.id) && Objects.equals(name, player.name) && gender == player.gender;
+        PlayerEntity playerEntity = (PlayerEntity) o;
+        return Objects.equals(id, playerEntity.id) && Objects.equals(name, playerEntity.name) && gender == playerEntity.gender;
     }
 
     @Override

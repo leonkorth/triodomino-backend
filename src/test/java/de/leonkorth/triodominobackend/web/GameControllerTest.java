@@ -1,6 +1,6 @@
 package de.leonkorth.triodominobackend.web;
 
-import de.leonkorth.triodominobackend.persistence.entities.Game;
+import de.leonkorth.triodominobackend.persistence.entities.GameEntity;
 import de.leonkorth.triodominobackend.service.GameService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,8 +33,8 @@ public class GameControllerTest {
     @DisplayName("should return all games in json format")
     void findAllGames() throws Exception {
         var games = List.of(
-                new Game(1L, LocalDate.of(2023,1, 1)),
-                new Game( 2L, LocalDate.of(2022,2,2))
+                new GameEntity(1L, LocalDate.of(2023,1, 1)),
+                new GameEntity( 2L, LocalDate.of(2022,2,2))
         );
 
         doReturn(games).when(gameService).findAll();

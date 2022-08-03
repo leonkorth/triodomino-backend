@@ -1,7 +1,6 @@
 package de.leonkorth.triodominobackend.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity(name = "game")
-public class Game {
+public class GameEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +19,12 @@ public class Game {
     @FutureOrPresent(message = "please provide a date in the future or present")
     private LocalDate date;
 
-    public Game(Long id, LocalDate date) {
+    public GameEntity(Long id, LocalDate date) {
         this.id = id;
         this.date = date;
     }
 
-    public Game() {
+    public GameEntity() {
     }
 
     @Override
@@ -33,8 +32,8 @@ public class Game {
 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(id, game.id) && Objects.equals(date, game.date);
+        GameEntity gameEntity = (GameEntity) o;
+        return Objects.equals(id, gameEntity.id) && Objects.equals(date, gameEntity.date);
     }
 
     @Override

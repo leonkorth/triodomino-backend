@@ -1,15 +1,14 @@
 package de.leonkorth.triodominobackend.persistence.repos;
 
-import com.sun.xml.bind.v2.schemagen.episode.Klass;
-import de.leonkorth.triodominobackend.persistence.entities.Player;
+import de.leonkorth.triodominobackend.persistence.entities.PlayerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Long> {
+public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
 
-    Optional<Player> findFirstByName(String name);
+    Optional<PlayerEntity> findFirstByName(String name);
 
 }

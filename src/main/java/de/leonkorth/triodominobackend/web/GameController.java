@@ -1,6 +1,6 @@
 package de.leonkorth.triodominobackend.web;
 
-import de.leonkorth.triodominobackend.persistence.entities.Game;
+import de.leonkorth.triodominobackend.persistence.entities.GameEntity;
 import de.leonkorth.triodominobackend.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ public class GameController {
     GameService service;
 
     @PostMapping(path = "/api/v1/games")
-    public Game createGame(@Valid @RequestBody Game game){return service.createGame(game);}
+    public GameEntity createGame(@Valid @RequestBody GameEntity gameEntity){return service.createGame(gameEntity);}
 
     @GetMapping(path = "/api/v1/games")
-    public ResponseEntity<List<Game>> getGames() {return ResponseEntity.ok(service.findAll());}
+    public ResponseEntity<List<GameEntity>> getGames() {return ResponseEntity.ok(service.findAll());}
 }

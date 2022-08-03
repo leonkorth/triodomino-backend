@@ -2,7 +2,7 @@ package de.leonkorth.triodominobackend.web;
 
 
 import de.leonkorth.triodominobackend.persistence.entities.Gender;
-import de.leonkorth.triodominobackend.persistence.entities.Player;
+import de.leonkorth.triodominobackend.persistence.entities.PlayerEntity;
 import de.leonkorth.triodominobackend.service.PlayerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,8 +33,8 @@ public class PlayerControllerTest {
  @DisplayName("should return all players in json format")
  void findAllPlayers() throws Exception{
      var players = List.of(
-             new Player(1L,"Leon", Gender.FEMALE),
-             new Player(2L,"Leon2", Gender.MALE)
+             new PlayerEntity(1L,"Leon", Gender.FEMALE),
+             new PlayerEntity(2L,"Leon2", Gender.MALE)
      );
 
      doReturn(players).when(playerService).findAll();
@@ -56,7 +56,7 @@ public class PlayerControllerTest {
  @Test
  @DisplayName("should find player by name ")
  void findPlayerByName1() throws Exception{
-     var player = new Player(1L,"Leon",Gender.MALE);
+     var player = new PlayerEntity(1L,"Leon",Gender.MALE);
 
      doReturn(player).when(playerService).findByName("Leon");
 
