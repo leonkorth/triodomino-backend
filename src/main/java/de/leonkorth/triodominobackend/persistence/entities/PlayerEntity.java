@@ -4,7 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity(name = "player")
 public class PlayerEntity {
     @Id
@@ -19,6 +22,9 @@ public class PlayerEntity {
     @Enumerated(value = EnumType.STRING)
     @NotNull
     private Gender gender;
+
+    @OneToMany(mappedBy = "playerEntity")
+    private Set<GamePlayerEntity> gamePlayerEntities = new HashSet<>();
 
     public PlayerEntity(Long id, String name, Gender gender) {
         this.id = id;

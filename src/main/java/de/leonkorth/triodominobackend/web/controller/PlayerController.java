@@ -1,4 +1,4 @@
-package de.leonkorth.triodominobackend.web;
+package de.leonkorth.triodominobackend.web.controller;
 
 
 import de.leonkorth.triodominobackend.persistence.entities.PlayerEntity;

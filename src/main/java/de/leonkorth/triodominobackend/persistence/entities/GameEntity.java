@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "game")
 public class GameEntity {
@@ -18,6 +21,9 @@ public class GameEntity {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @FutureOrPresent(message = "please provide a date in the future or present")
     private LocalDate date;
+
+    @OneToMany(mappedBy = "gameEntity")
+    private Set<GamePlayerEntity> gamePlayerEntities = new HashSet<>();
 
     public GameEntity(Long id, LocalDate date) {
         this.id = id;
