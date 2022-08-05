@@ -13,4 +13,14 @@ public class GamePlayerEntityPK implements Serializable {
 
     @Column(name = "PLAYER_ID")
     private Long playerId;
+
+    public GamePlayerEntityPK(Long gameId, Long playerId) {
+        this.gameId = gameId;
+        this.playerId = playerId;
+    }
+
+
+    public GamePlayerEntityPK() {
+
+    }
 }
