@@ -9,4 +9,5 @@ public interface GamePlayerRepository extends JpaRepository<GamePlayerEntity, Lo
 
 
 
+
 }

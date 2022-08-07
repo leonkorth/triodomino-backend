@@ -1,7 +1,7 @@
 package de.leonkorth.triodominobackend.service;
 
 import de.leonkorth.triodominobackend.persistence.entities.GamePlayerEntity;
-import de.leonkorth.triodominobackend.persistence.entities.gameStat;
+import de.leonkorth.triodominobackend.persistence.entities.GameStat;
 import de.leonkorth.triodominobackend.persistence.repos.GameRepository;
 import de.leonkorth.triodominobackend.persistence.repos.GamePlayerRepository;
 import de.leonkorth.triodominobackend.persistence.repos.PlayerRepository;
@@ -24,12 +24,16 @@ public class GameStatsService {
     @Autowired
     PlayerRepository playerRepo;
 
-    public gameStat getStatsForPlayer(Long playerId){
+    public GameStat getStatsForPlayer(Long playerId){
+
+
 
         List<GamePlayerEntity>  entities = new ArrayList<>(gamePlayerRepo.findAll())
                 .stream()
                 .filter(entity -> entity.getPlayerEntity().getId().equals(playerId))
                 .toList();
+
+        String name = entities.stream().findFirst().get().getPlayerEntity().getName();
 
         int totalGames = entities.size();
 
@@ -39,7 +43,7 @@ public class GameStatsService {
 
         int victories = toIntExact(entities.stream().filter(entity -> entity.getPlacement() == 1).count());
 
-        return new gameStat(playerId,totalGames,victories,points,draws);
+        return new GameStat(playerId,name, totalGames,victories,points,draws);
 
     }
 
