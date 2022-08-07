@@ -22,4 +22,6 @@ public class PlayerService {
         var playerEntity = repository.findFirstByName(name);
         return playerEntity.orElse(null);
     }
+
+
 }
