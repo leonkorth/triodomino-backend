@@ -2,6 +2,7 @@ package de.leonkorth.triodominobackend.service;
 
 import de.leonkorth.triodominobackend.persistence.entities.*;
 import de.leonkorth.triodominobackend.persistence.repos.GamePlayerRepository;
+import de.leonkorth.triodominobackend.persistence.repos.PlayerRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -20,7 +22,10 @@ import static org.mockito.Mockito.doReturn;
 public class GameStatsServiceTest implements WithAssertions {
 
     @Mock
-    GamePlayerRepository repo;
+    GamePlayerRepository gamePlayerRepo;
+
+    @Mock
+    PlayerRepository playerRepo;
 
     @InjectMocks
     GameStatsService service;
@@ -42,7 +47,9 @@ public class GameStatsServiceTest implements WithAssertions {
                 new GamePlayerEntity(new GamePlayerEntityPK(20L,2L),game2,player2,1,200,0)
         );
 
-        doReturn(entities).when(repo).findAll();
+        doReturn(entities).when(gamePlayerRepo).findAll();
+        doReturn(Optional.of(player1)).when(playerRepo).findById(1L);
+        doReturn(Optional.of(player2)).when(playerRepo).findById(2L);
 
         GameStat expected1 = new GameStat(1L,"Leon",2,1,130,5);
         GameStat actual1 = service.getStatsForPlayer(1L);
