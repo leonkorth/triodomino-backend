@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedOrigins(
                         "http://localhost:3001/",
-                        "https://https://triodomino.herokuapp.com/");
+                        "https://triodomino.herokuapp.com/");
     }
 }
 

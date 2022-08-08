@@ -23,7 +23,7 @@ public class GameStatsControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    GameStatsService service;
+    private GameStatsService service;
 
     @Test
     @DisplayName("should validate bad request")
