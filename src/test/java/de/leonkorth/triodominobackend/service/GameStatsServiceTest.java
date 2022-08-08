@@ -32,7 +32,7 @@ public class GameStatsServiceTest implements WithAssertions {
 
     @Test
     @DisplayName("should return the correct player stats for one player")
-    void testGetStatsForPlayer(){
+    void testGetStatsForPlayer1(){
 
         PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
         PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
@@ -60,10 +60,32 @@ public class GameStatsServiceTest implements WithAssertions {
         assertEquals(expected1,actual1);
         assertEquals(expected2,actual2);
 
+    }
 
+    @Test
+    @DisplayName("should not return the  player stats for one player")
+    void testGetStatsForPlayer2(){
 
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
 
+        GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
+        GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
 
+        var entities = List.of(
+                new GamePlayerEntity(new GamePlayerEntityPK(10L,1L),game1,player1,1,100,0),
+                new GamePlayerEntity(new GamePlayerEntityPK(10L,2L),game1,player2,2,50,2),
+                new GamePlayerEntity(new GamePlayerEntityPK(20L,1L),game2,player1,2,30,5),
+                new GamePlayerEntity(new GamePlayerEntityPK(20L,2L),game2,player2,1,200,0)
+        );
+
+        doReturn(entities).when(gamePlayerRepo).findAll();
+        doReturn(Optional.empty()).when(playerRepo).findById(3L);
+
+        GameStat expected1 = null;
+        GameStat actual1 = service.getStatsForPlayer(3L);
+
+        assertEquals(expected1,actual1);
 
     }
 
