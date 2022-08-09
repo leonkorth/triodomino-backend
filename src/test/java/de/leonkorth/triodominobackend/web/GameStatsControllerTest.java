@@ -31,7 +31,7 @@ public class GameStatsControllerTest {
 
         doReturn(null).when(service).getStatsForPlayer(1L);
 
-        mockMvc.perform(get("/api/v1/stats/player/1"))
+        mockMvc.perform(get("/api/v1/stats/players/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -41,7 +41,7 @@ public class GameStatsControllerTest {
 
         doReturn(new GameStat(1L,"Leon",3,1,100,1)).when(service).getStatsForPlayer(1L);
 
-        mockMvc.perform(get("/api/v1/stats/player/1"))
+        mockMvc.perform(get("/api/v1/stats/players/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Leon"))
                 .andExpect(jsonPath("$.playerId").value(1))

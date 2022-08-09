@@ -63,7 +63,7 @@ public class GameStatsServiceTest implements WithAssertions {
     }
 
     @Test
-    @DisplayName("should not return the  player stats for one player")
+    @DisplayName("should not return the player stats for one player")
     void testGetStatsForPlayer2(){
 
         PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
@@ -90,11 +90,38 @@ public class GameStatsServiceTest implements WithAssertions {
     }
 
     @Test
+    @DisplayName("should return the player stats for one player with no games")
+    void testGetStatsForPlayer3(){
+
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
+
+        GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
+        GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
+
+        var entities = List.of(
+                new GamePlayerEntity(new GamePlayerEntityPK(10L,1L),game1,player1,1,100,0),
+                new GamePlayerEntity(new GamePlayerEntityPK(20L,1L),game2,player1,2,30,5)
+        );
+
+        doReturn(entities).when(gamePlayerRepo).findAll();
+        doReturn(Optional.of(player2)).when(playerRepo).findById(2L);
+
+        GameStat expected1 = new GameStat(2L,"Maxi",0,0,0,0);
+        GameStat actual1 = service.getStatsForPlayer(2L);
+
+        assertEquals(expected1,actual1);
+
+    }
+
+    @Test
     @DisplayName("should return the correct player stats for all players")
     void testGetStatsForAllPlayers1(){
 
         PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
         PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
+        PlayerEntity player3 = new PlayerEntity(3L,"Lena", Gender.FEMALE);
+
 
         GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
         GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
@@ -109,13 +136,16 @@ public class GameStatsServiceTest implements WithAssertions {
         doReturn(entities).when(gamePlayerRepo).findAll();
         doReturn(Optional.of(player1)).when(playerRepo).findById(1L);
         doReturn(Optional.of(player2)).when(playerRepo).findById(2L);
-        doReturn(List.of(player1,player2)).when(playerRepo).findAll();
+        doReturn(Optional.of(player3)).when(playerRepo).findById(3L);
+        doReturn(List.of(player1,player2,player3)).when(playerRepo).findAll();
 
 
         var expected1 = List.of(
                 new GameStat(1L,"Leon",2,1,130,5),
-                new GameStat(2L,"Maxi",2,1,250,2)
-                ) ;
+                new GameStat(2L,"Maxi",2,1,250,2),
+                new GameStat(3L,"Lena",0,0,0,0)
+
+        ) ;
         var actual1 = service.getStatsForAllPlayers();
 
         assertEquals(expected1,actual1);

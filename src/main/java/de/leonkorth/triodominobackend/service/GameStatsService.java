@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
 import static java.lang.Math.toIntExact;
 
 @Service
@@ -33,9 +35,13 @@ public class GameStatsService {
                 .filter(entity -> entity.getPlayerEntity().getId().equals(playerId))
                 .toList();
 
-        if(playerRepo.findById(playerId).isEmpty() || entities.isEmpty()) return null;
+        PlayerEntity player = playerRepo.findById(playerId).orElse(null);
 
-        String name = entities.stream().findFirst().get().getPlayerEntity().getName();
+        if(player == null) return null;
+
+        String name = player.getName();
+
+        if(entities.isEmpty()) return new GameStat(playerId,name,0,0,0,0);
 
         int totalGames = entities.size();
 
@@ -56,6 +62,8 @@ public class GameStatsService {
         playerRepo.findAll().stream().map(PlayerEntity::getId).toList().forEach(
                 id -> gameStats.add(getStatsForPlayer(id))
         );
+
+        if(gameStats.isEmpty()) return null;
 
         return gameStats;
 

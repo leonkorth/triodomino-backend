@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class GameStatsController {
 
     @Autowired(required = false)
     GameStatsService service;
 
-    @GetMapping(path = "/api/v1/stats/player/{id}")
+    @GetMapping(path = "/api/v1/stats/players/{id}")
     public ResponseEntity<GameStat> getStatsForPlayer(@PathVariable String id){
 
         var stats = service.getStatsForPlayer(Long.parseLong(id));
@@ -22,4 +24,13 @@ public class GameStatsController {
         return stats != null ? ResponseEntity.ok(stats) : ResponseEntity.notFound().build();
     }
 
+
+    @GetMapping(path = "/api/v1/stats/players")
+    public ResponseEntity<List<GameStat>> getStatsForAllPLayers(){
+
+        var stats = service.getStatsForAllPlayers();
+
+        return stats != null ? ResponseEntity.ok(stats) : ResponseEntity.notFound().build();
+
+    }
 }
