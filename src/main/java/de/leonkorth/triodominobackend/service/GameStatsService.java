@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import static java.lang.Math.toIntExact;
 
@@ -45,6 +46,19 @@ public class GameStatsService {
         int victories = toIntExact(entities.stream().filter(entity -> entity.getPlacement() == 1).count());
 
         return new GameStat(playerId,name, totalGames,victories,points,draws);
+
+    }
+
+    public List<GameStat> getStatsForAllPlayers(){
+
+        List<GameStat> gameStats = new LinkedList<>();
+
+        playerRepo.findAll().stream().map(PlayerEntity::getId).toList().forEach(
+                id -> gameStats.add(getStatsForPlayer(id))
+        );
+
+        return gameStats;
+
 
     }
 
