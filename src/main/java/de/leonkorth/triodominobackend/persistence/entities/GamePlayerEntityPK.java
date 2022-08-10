@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class GamePlayerEntityPK implements Serializable {
@@ -22,5 +23,18 @@ public class GamePlayerEntityPK implements Serializable {
 
     public GamePlayerEntityPK() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GamePlayerEntityPK that = (GamePlayerEntityPK) o;
+        return Objects.equals(gameId, that.gameId) && Objects.equals(playerId, that.playerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameId, playerId);
     }
 }
