@@ -33,8 +33,8 @@ public class PlayerControllerTest {
  @DisplayName("should return all players in json format")
  void findAllPlayers() throws Exception{
      var players = List.of(
-             new PlayerEntity(1L,"Leon", Gender.FEMALE),
-             new PlayerEntity(2L,"Leon2", Gender.MALE)
+             new PlayerEntity(1L,"Leon"),
+             new PlayerEntity(2L,"Leon2")
      );
 
      doReturn(players).when(playerService).findAll();
@@ -45,10 +45,8 @@ public class PlayerControllerTest {
              .andExpect(jsonPath("$.size()").value(2))
              .andExpect(jsonPath("$[0].id").value(1L))
              .andExpect(jsonPath("$[0].name").value("Leon"))
-             .andExpect(jsonPath("$[0].gender").value("FEMALE"))
              .andExpect(jsonPath("$[1].id").value(2L))
-             .andExpect(jsonPath("$[1].name").value("Leon2"))
-             .andExpect(jsonPath("$[1].gender").value("MALE"));
+             .andExpect(jsonPath("$[1].name").value("Leon2"));
 
  }
 
@@ -56,7 +54,7 @@ public class PlayerControllerTest {
  @Test
  @DisplayName("should find player by name ")
  void findPlayerByName1() throws Exception{
-     var player = new PlayerEntity(1L,"Leon",Gender.MALE);
+     var player = new PlayerEntity(1L,"Leon");
 
      doReturn(player).when(playerService).findByName("Leon");
 
@@ -81,7 +79,7 @@ public class PlayerControllerTest {
  @Test
  @DisplayName("should validate create ingredient request with invalid name")
  void createInvalidPlayer() throws Exception{
-     String player = "{\"name\": \"xx\",\"gender\": \"FEMALE\"}";
+     String player = "{\"name\": \"xx\"}";
 
      mockMvc.perform(
              post("/api/v1/players")
@@ -91,48 +89,6 @@ public class PlayerControllerTest {
      )
      .andExpect(status().isBadRequest());
  }
-
-    @Test
-    @DisplayName("should validate create ingredient request with invalid gender (lowercase)")
-    void createInvalidPlayer2() throws Exception{
-        String player = "{\"name\": \"xxxx\",\"gender\": \"female\"}";
-
-        mockMvc.perform(
-                        post("/api/v1/players")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(player)
-                                .characterEncoding("utf-8")
-                )
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("should validate create ingredient request with valid gender")
-    void createInvalidPlayer3() throws Exception{
-        String player = "{\"name\": \"xxxx\",\"gender\": \"FEMALE\"}";
-
-        mockMvc.perform(
-                        post("/api/v1/players")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(player)
-                                .characterEncoding("utf-8")
-                )
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @DisplayName("should validate create ingredient request with invalid gender (typo)")
-    void createInvalidPlayer4() throws Exception{
-        String player = "{\"name\": \"xxxx\",\"gender\": \"mele\"}";
-
-        mockMvc.perform(
-                        post("/api/v1/players")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(player)
-                                .characterEncoding("utf-8")
-                )
-                .andExpect(status().isBadRequest());
-    }
 
 
 

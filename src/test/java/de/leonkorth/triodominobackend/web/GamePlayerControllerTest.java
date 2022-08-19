@@ -33,7 +33,7 @@ public class GamePlayerControllerTest {
     void findAllPlayer() throws Exception{
 
         GameEntity game = new GameEntity(1L, LocalDate.of(2022,3,1));
-        PlayerEntity player = new PlayerEntity(1L,"Leon", Gender.MALE);
+        PlayerEntity player = new PlayerEntity(1L,"Leon");
 
         var gamePlayerEntities = List.of(
                 new GamePlayerEntity(new GamePlayerEntityPK(1L,1L),game,player,1,100,3)
@@ -49,7 +49,6 @@ public class GamePlayerControllerTest {
                 .andExpect(jsonPath("$[0].gameEntity.date").value("01-03-2022"))
                 .andExpect(jsonPath("$[0].playerEntity.id").value(1))
                 .andExpect(jsonPath("$[0].playerEntity.name").value("Leon"))
-                .andExpect(jsonPath("$[0].playerEntity.gender").value("MALE"))
                 .andExpect(jsonPath("$[0].placement").value(1))
                 .andExpect(jsonPath("$[0].draws").value(3))
                 .andExpect(jsonPath("$[0].points").value(100));

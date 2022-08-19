@@ -34,8 +34,8 @@ public class GameStatsServiceTest implements WithAssertions {
     @DisplayName("should return the correct player stats for one player")
     void testGetStatsForPlayer1(){
 
-        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
-        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon");
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi");
 
         GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
         GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
@@ -66,8 +66,8 @@ public class GameStatsServiceTest implements WithAssertions {
     @DisplayName("should not return the player stats for one player")
     void testGetStatsForPlayer2(){
 
-        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
-        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon");
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi");
 
         GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
         GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
@@ -93,8 +93,8 @@ public class GameStatsServiceTest implements WithAssertions {
     @DisplayName("should return the player stats for one player with no games")
     void testGetStatsForPlayer3(){
 
-        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
-        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon");
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi");
 
         GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
         GameEntity game2 = new GameEntity(20L, LocalDate.of(2021,1,2));
@@ -118,9 +118,9 @@ public class GameStatsServiceTest implements WithAssertions {
     @DisplayName("should return the correct player stats for all players")
     void testGetStatsForAllPlayers1(){
 
-        PlayerEntity player1 = new PlayerEntity(1L,"Leon", Gender.MALE);
-        PlayerEntity player2 = new PlayerEntity(2L,"Maxi", Gender.FEMALE);
-        PlayerEntity player3 = new PlayerEntity(3L,"Lena", Gender.FEMALE);
+        PlayerEntity player1 = new PlayerEntity(1L,"Leon");
+        PlayerEntity player2 = new PlayerEntity(2L,"Maxi");
+        PlayerEntity player3 = new PlayerEntity(3L,"Lena");
 
 
         GameEntity game1 = new GameEntity(10L, LocalDate.of(2022,12,1));
