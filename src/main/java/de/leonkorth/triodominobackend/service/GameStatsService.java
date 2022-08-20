@@ -30,14 +30,15 @@ public class GameStatsService {
 
     public GameStat getStatsForPlayer(Long playerId){
 
+        PlayerEntity player = playerRepo.findById(playerId).orElse(null);
+
+        if(player == null) return null;
+
         List<GamePlayerEntity>  entities = new ArrayList<>(gamePlayerRepo.findAll())
                 .stream()
                 .filter(entity -> entity.getPlayerEntity().getId().equals(playerId))
                 .toList();
 
-        PlayerEntity player = playerRepo.findById(playerId).orElse(null);
-
-        if(player == null) return null;
 
         String name = player.getName();
 
